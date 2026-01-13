@@ -18,4 +18,5 @@ jobs:
         run: pip install coolprop
 
       - name: 執行程式
-        run: python your_script_name.py  # 記得換成你的檔名
+
+        run: python pipe_turn_pd.py  # 記得換成你的檔名

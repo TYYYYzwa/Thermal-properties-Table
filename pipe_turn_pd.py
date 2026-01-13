@@ -1,5 +1,12 @@
+def install_coolprop():
+    try:
+        import coolprop
+    except:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "coolprop"])
+install_coolprop()
 import streamlit as st
 import math
+
 # from CoolProp.CoolProp import FluidsList
 import GetProperties
 import CoolProp.CoolProp as CP
@@ -182,6 +189,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

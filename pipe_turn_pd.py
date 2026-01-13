@@ -95,7 +95,7 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
 # ==============================
 # Streamlit UI
 # ==============================
-st.set_page_config(page_title="Straight Pipe Pressure Drop Tool", layout="centered")
+st.set_page_config(page_title="Fluid Thermal Property Tool", layout="centered")
 
 st.title("Fluid Thermal Property Tool")
 st.caption("Fluid Thermal Property table")
@@ -179,6 +179,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

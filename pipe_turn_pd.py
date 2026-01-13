@@ -133,15 +133,20 @@ T_in = st.number_input(
     format="%.1f",
     key="T_in"
 )
-P = st.number_input(
-    "Operating Pressure (Pa)",
-    min_value=101325.0,
-    max_value=5000000.0,
-    step=10.0,
-    value=101325.0,
-    format="%.1f",
-    key="P"
-)
+try:
+    if T_in == T_sat:
+        
+        P = st.number_input(
+            "Operating Pressure (Pa)",
+            min_value=101325.0,
+            max_value=5000000.0,
+            step=10.0,
+            value=101325.0,
+            format="%.1f",
+            key="P"
+        )
+    else:
+        pass
 st.divider()
 
 
@@ -179,6 +184,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

@@ -1,9 +1,15 @@
 import streamlit as st
 import math
-from CoolProp.CoolProp import FluidsList
+# from CoolProp.CoolProp import FluidsList
 import GetProperties
+import CoolProp.CoolProp as CP
 
-fluid_db = FluidsList() + ['PG25(DOW)']+['PG55(DOW)']
+# 獲取所有流體清單（以逗號分隔的字串）
+fluids_string = CP.get_global_param_string("FluidsList")
+
+# 將字串轉換為列表 (List) 方便閱讀
+fluids_list = fluids_string.split(',')
+fluid_db = FluidsList + ['PG25(DOW)']+['PG55(DOW)']
 
 
 # ==============================
@@ -176,6 +182,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

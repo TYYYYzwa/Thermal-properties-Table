@@ -7,7 +7,7 @@ from CoolProp.CoolProp import FluidsList
 
 
 fluid_db = FluidsList() + ['PG25(DOW)']+['PG55(DOW)']
-
+fluid_db.sort()
 
 # ==============================
 # Core function (原始計算邏輯)
@@ -181,6 +181,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

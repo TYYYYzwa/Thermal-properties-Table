@@ -27,7 +27,7 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
     Tsat = Tsat + 273.15  # K
     T_min = 0
     T_max = 0
-     P_max = 0
+    P_max = 0
     P_min = 0
     # ===== Fluid Properties =====
     try:
@@ -192,6 +192,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

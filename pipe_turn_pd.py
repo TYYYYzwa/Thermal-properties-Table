@@ -62,7 +62,7 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
                 P_min = ff.P_min()
                 P_sat = P
         elif T_in == Tsat:
-            ff = GetProperties.Fluid_Sat(fluid_name, Tsat)
+            ff = GetProperties.Fluid_Sat(fluid_name, T_in)
             T_min = ff.T_min()
             T_max = ff.T_max()
             P_sat = ff.P_sat()
@@ -77,6 +77,7 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
             H_LV = ff.H_LV()
             P_max = ff.P_max()
             P_min = ff.P_min()
+            Tsat = ff.T_sat()
     except:
         pass
     print('T_in:', T_in)
@@ -192,6 +193,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

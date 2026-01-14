@@ -35,10 +35,10 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
         print('Tsat:', Tsat)
         if T_in < Tsat or T_in > Tsat:
             if fluid_name == 'PG25(DOW)':
-                VLIQ = 1.44657e-6*T_in**2 - 0.000178*T_in + 0.0060857  # Pa·s
-                DENLIQ = -0.002862487*T_in**2 - 0.290577*T_in + 1036.8704    # kg/m3
-                CPLIQ = -0.013209494*T_in**2 + 3.1413829*T_in + 4010.774     # J/kg-K
-                TCXLIQ = -5.92621e-6*T_in**2 + 0.0013567*T_in + 0.4315547      # W/m-K
+                VLIQ = 1.44657e-6*T_in**2 - 0.00097*T_in + 0.162548  # Pa·s
+                DENLIQ = -0.00286*T_in**2 +1.2732*T_in + 902.6686    # kg/m3
+                CPLIQ = -0.01321*T_in**2 + 10.35773*T_in + 2167.133     # J/kg-K
+                TCXLIQ = -5.92621e-6*T_in**2 + 0.004594*T_in  -0.3812      # W/m-K
                 T_min = 273.15 -5  # K
                 T_max = 373.15 +80  # K
 
@@ -192,6 +192,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

@@ -3,7 +3,7 @@ import sys
 import streamlit as st
 import math
 from CoolProp.CoolProp import FluidsList
-
+import GetProperties
 
 
 fluid_db = FluidsList() + ['PG25(DOW)']+['PG55(DOW)']
@@ -193,6 +193,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

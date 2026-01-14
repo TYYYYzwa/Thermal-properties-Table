@@ -4,7 +4,8 @@ import streamlit as st
 import math
 from CoolProp.CoolProp import FluidsList
 import GetProperties
-
+import matplotlib.pyplot as plt
+import numpy as np
 
 fluid_db = FluidsList() + ['PG25(DOW)']+['PG55(DOW)']
 fluid_db.sort()
@@ -78,9 +79,16 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
         P_max = ff.P_max()
         P_min = ff.P_min()
         Tsat = T_in
+        x = np.linspace(T_min, T_max, 0.5)
+        y = np.ff.P_sat(x)
+        fig, ax = plt.subplots()
+        ax.plot(x, y)
+        ax.set_title("Sine Wave")
     # except:
     #     pass
     print('T_in:', T_in)
+
+ 
     return {
         'T_min': T_min,
         'T_max': T_max,
@@ -191,8 +199,10 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Vapor Thermal Conductivity(W/m-K)", f"{result['TCXVAP']:.5f}")
         st.metric("Vapor Specific Heat(J/kg-K)", f"{result['CPVAP']:.2f}")
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
+    st.pyplot(fig)
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

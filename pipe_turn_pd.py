@@ -77,7 +77,7 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
         H_LV = ff.H_LV()
         P_max = ff.P_max()
         P_min = ff.P_min()
-        Tsat = ff.T_sat()
+        Tsat = T_in
     # except:
     #     pass
     print('T_in:', T_in)
@@ -193,6 +193,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

@@ -43,10 +43,10 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
                 T_max = 373.15 +80  # K
 
             elif fluid_name == 'PG55(DOW)':
-                VLIQ = 1.41818E-06* T_in**2 - 0.000234788*T_in + 0.011193939
-                DENLIQ =-0.003484848 * T_in**2	-0.400090909*T_in+	1064.175758
-                CPLIQ =4.8684E-17* T_in**2+	5.03030303*T_in+	3175.757576
-                TCXLIQ =-4.09091E-06 * T_in**2 + 0.000795303*T_in +	0.306439394
+                VLIQ = 1.47e-4* T_in**2 -9.13e-2*T_in + 1.41e1
+                DENLIQ =-0.00218 * T_in**2	+0.653669*T_in+	1051.819
+                CPLIQ =-6.44387E-18* T_in**2+	4.944615385*T_in+	1830.486
+                TCXLIQ =-2.63099E-09* T_in**2 +2.09486E-06*T_in + -6.68281E-05
                 T_min = 273.15 +35  # K
                 T_max = 373.15 +80  # K
             if fluid_name in FluidsList():
@@ -193,6 +193,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

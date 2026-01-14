@@ -30,56 +30,56 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
     P_max = 0
     P_min = 0
     # ===== Fluid Properties =====
-    try:
-        print('T_in:', T_in)
-        print('Tsat:', Tsat)
-        if T_in < Tsat or T_in > Tsat:
-            if fluid_name == 'PG25(DOW)':
-                VLIQ = 1.44657e-6*T_in**2 - 0.00097*T_in + 0.162548  # Pa·s
-                DENLIQ = -0.00286*T_in**2 +1.2732*T_in + 902.6686    # kg/m3
-                CPLIQ = -0.01321*T_in**2 + 10.35773*T_in + 2167.133     # J/kg-K
-                TCXLIQ = -5.92621e-6*T_in**2 + 0.004594*T_in  -0.3812      # W/m-K
-                T_min = 273.15 -5  # K
-                T_max = 373.15 +80  # K
+    # try:
+    print('T_in:', T_in)
+    print('Tsat:', Tsat)
+    if T_in < Tsat or T_in > Tsat:
+        if fluid_name == 'PG25(DOW)':
+            VLIQ = 1.44657e-6*T_in**2 - 0.00097*T_in + 0.162548  # Pa·s
+            DENLIQ = -0.00286*T_in**2 +1.2732*T_in + 902.6686    # kg/m3
+            CPLIQ = -0.01321*T_in**2 + 10.35773*T_in + 2167.133     # J/kg-K
+            TCXLIQ = -5.92621e-6*T_in**2 + 0.004594*T_in  -0.3812      # W/m-K
+            T_min = 273.15 -5  # K
+            T_max = 373.15 +80  # K
 
-            elif fluid_name == 'PG55(DOW)':
-                VLIQ = 1.47e-4* T_in**2 -9.13e-2*T_in + 1.41e1
-                DENLIQ =-0.00218 * T_in**2	+0.653669*T_in+	1051.819
-                CPLIQ =-6.44387E-18* T_in**2+	4.944615385*T_in+	1830.486
-                TCXLIQ =-2.63099E-09* T_in**2 +2.09486E-06*T_in + -6.68281E-05
-                T_min = 273.15 +35  # K
-                T_max = 373.15 +80  # K
-            if fluid_name in FluidsList():
-                ff = GetProperties.Fluid_NotSat(fluid_name,P, T_in)
-                Tsat = ff.T_sat()
-                VLIQ = ff.V()
-                DENLIQ = ff.DEN()
-                CPLIQ = ff.CP()
-                TCXLIQ = ff.TCX()
-                T_min = ff.T_min()
-                T_max = ff.T_max()
-                P_max = ff.P_max()
-                P_min = ff.P_min()
-                P_sat = P
-        elif T_in == Tsat:
-            ff = GetProperties.Fluid_Sat(fluid_name, T_in)
+        elif fluid_name == 'PG55(DOW)':
+            VLIQ = 1.47e-4* T_in**2 -9.13e-2*T_in + 1.41e1
+            DENLIQ =-0.00218 * T_in**2	+0.653669*T_in+	1051.819
+            CPLIQ =-6.44387E-18* T_in**2+	4.944615385*T_in+	1830.486
+            TCXLIQ =-2.63099E-09* T_in**2 +2.09486E-06*T_in + -6.68281E-05
+            T_min = 273.15 +35  # K
+            T_max = 373.15 +80  # K
+        if fluid_name in FluidsList():
+            ff = GetProperties.Fluid_NotSat(fluid_name,P, T_in)
+            Tsat = ff.T_sat()
+            VLIQ = ff.V()
+            DENLIQ = ff.DEN()
+            CPLIQ = ff.CP()
+            TCXLIQ = ff.TCX()
             T_min = ff.T_min()
             T_max = ff.T_max()
-            P_sat = ff.P_sat()
-            VLIQ = ff.VLIQ()
-            DENLIQ = ff.DENLIQ()
-            CPLIQ = ff.CPLIQ()
-            TCXLIQ = ff.TCXLIQ()
-            VVAP = ff.VVAP()
-            DENVAP = ff.DENVAP()
-            CPVAP = ff.CPVAP()
-            TCXVAP = ff.TCXVAP()
-            H_LV = ff.H_LV()
             P_max = ff.P_max()
             P_min = ff.P_min()
-            Tsat = ff.T_sat()
-    except:
-        pass
+            P_sat = P
+    elif T_in == Tsat:
+        ff = GetProperties.Fluid_Sat(fluid_name, T_in)
+        T_min = ff.T_min()
+        T_max = ff.T_max()
+        P_sat = ff.P_sat()
+        VLIQ = ff.VLIQ()
+        DENLIQ = ff.DENLIQ()
+        CPLIQ = ff.CPLIQ()
+        TCXLIQ = ff.TCXLIQ()
+        VVAP = ff.VVAP()
+        DENVAP = ff.DENVAP()
+        CPVAP = ff.CPVAP()
+        TCXVAP = ff.TCXVAP()
+        H_LV = ff.H_LV()
+        P_max = ff.P_max()
+        P_min = ff.P_min()
+        Tsat = ff.T_sat()
+    # except:
+    #     pass
     print('T_in:', T_in)
     return {
         'T_min': T_min,
@@ -193,6 +193,7 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 

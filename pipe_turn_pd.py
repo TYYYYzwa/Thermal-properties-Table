@@ -79,11 +79,26 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
         P_max = ff.P_max()
         P_min = ff.P_min()
         Tsat = T_in
-        x = np.linspace(T_min, T_max, 0.5)
-        y = np.ff.P_sat(x)
+        x = np.linspace(T_min, ff.T_critical(), 100)
+        
+        print('T_critical:', ff.T_critical())
+        print('T_min:', T_min)
+        print('T_max:', T_max)
+        y = []
+        for t in x:
+        # 這裡根據你的 GetProperties 結構，重新獲取每個溫度下的 P_sat
+            temp_ff = GetProperties.Fluid_Sat(fluid_name, t)
+            x_PLOT = x - 273.15  # Convert K to C for plotting
+            y.append(temp_ff.P_sat()*0.000145)
         fig, ax = plt.subplots()
-        ax.plot(x, y)
-        ax.set_title("Sine Wave")
+        print('x:', x)
+        print('x_PLOT:', x_PLOT)
+        print('y:', y)
+        ax.plot(x_PLOT, y)
+        ax.grid(True)
+        ax.set_xlabel("Saturation Temperature (°C)")
+        ax.set_ylabel("Saturation Pressure (Psi)")
+        ax.set_title("")
     # except:
     #     pass
     print('T_in:', T_in)
@@ -104,7 +119,8 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
         'CPLIQ': CPLIQ,
         'CPVAP': CPVAP,
         'TCXVAP': TCXVAP,
-        'H_LV': H_LV
+        'H_LV': H_LV,
+        'fig': fig
     }
     
 #test
@@ -199,9 +215,18 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Vapor Thermal Conductivity(W/m-K)", f"{result['TCXVAP']:.5f}")
         st.metric("Vapor Specific Heat(J/kg-K)", f"{result['CPVAP']:.2f}")
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
-    st.pyplot(fig)
+    st.pyplot(result['fig'])
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
+
+
+
+
+
+
+
+
 
 
 

@@ -30,6 +30,7 @@ def straightpipe_pd_approximation(T_in,Tsat,fluid_name,P):
     T_max = 0
     P_max = 0
     P_min = 0
+    fig = []
     # ===== Fluid Properties =====
     # try:
     print('T_in:', T_in)
@@ -215,9 +216,14 @@ if st.button("Check Thermal property", type="primary"):
         st.metric("Vapor Thermal Conductivity(W/m-K)", f"{result['TCXVAP']:.5f}")
         st.metric("Vapor Specific Heat(J/kg-K)", f"{result['CPVAP']:.2f}")
         st.metric("Latent Heat of Vaporization(J/kg)", f"{result['H_LV']:.1f}") 
-    st.pyplot(result['fig'])
+
+    try:
+        st.pyplot(result['fig'])
+    except:
+        pass
     # with st.expander("Additional Details"):
     #     st.write(f"Prandtl Number: {result['Prandtl_Number']:.3f}")
+
 
 
 
